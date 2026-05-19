@@ -1,0 +1,39 @@
+[
+  {
+    "image": "./assets/images/carreg-ateb.jpg",
+    "title": "Carreg Ateb: Vision or Dream?",
+    "location": "Free WiFi available",
+    "cost": "Free",
+    "time": "",
+    "standFirstCopy": "Enter the caves of North Wales, journey through the collection, and transform into your mythical self, using our experimental AR experience.",
+    "qrCode": "./assets/qrcodes/carreg-ateb-qr.png",
+    "cta": "Play now"
+  },
+  {
+    "image": "./assets/images/evergreen_artGuide_1680x1260.jpg",
+    "title": "Art Guide",
+    "location": "Available at the Information Desk",
+    "cost": "£2",
+    "time": "",
+    "standFirstCopy": "Be curious: open the Art Guide to see the bigger picture, start your journey through the National Gallery and experience the wonder of art."
+  },
+  {
+    "image": "./assets/images/evergreen_audioGuide_1680x1260.png",
+    "title": "Audio guides",
+    "location": "Available at the Information Desk",
+    "cost": "From £5",
+    "time": "10am–6pm",
+    "standFirstCopy": "Make the most of your time here with a self-guided audio tour of our paintings and ticketed exhibitions."
+  },
+    
+  {
+    "image": "./assets/images/evergreen_kop_1680x1260.png",
+    "title": "The Keeper of Paintings and the Palette of Perception",
+    "location": "Download the app \nfree on your phone \nor tablet \n\nFree WiFi available",
+    "cost": "Free",
+    "time": "",
+    "standFirstCopy": "Step into a hidden world of art and magic.<br><br>An immersive experience for children aged 7–11.",
+    "qrCode": "./assets/qrcodes/KoP_App_qr.png",
+    "cta": "Download"
+  }
+]

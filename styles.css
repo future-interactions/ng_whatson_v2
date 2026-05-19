@@ -1,0 +1,208 @@
+@font-face {
+  font-family: Frutiger;
+  src: url('./assets/FrutigerLTPro-Roman.otf') format("opentype")
+}
+
+@font-face {
+  font-family: Frutiger-b;
+  src: url('./assets/FrutigerLTPro-Bold.otf') format("opentype")
+}
+
+@font-face {
+  font-family: Frutiger-l;
+  src: url('./assets/FrutigerLTPro-Light.otf') format("opentype")
+}
+
+
+
+html,
+body {
+  width: 4320px;
+  height: 1328px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  position: absolute;
+  top: 70px;
+  left: 50px;
+  right: 50px;
+  width: 740px;
+}
+
+#scaled-container {
+  width: 4320px;
+  height: 1323px;
+  transform: scale(1);
+  transform-origin: top left;
+  position: absolute;
+  display: flex;
+  flex-wrap: nowrap;
+  /* Keep all items in one row */
+  gap: 20px;
+}
+
+.event {
+  position: relative;
+  width: 816px;
+  height: 1328px;
+  top: 20px;
+  background-color: #212833;
+  font-family: Frutiger-l;
+}
+
+.event img {
+  position: absolute;
+  width: 100%;
+  top: 53%;
+  object-fit: cover;
+  height: 45.5%;
+}
+
+.event .text-overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+
+.fixed-page {
+  width: 4320px;
+  height: 1323px;
+  position: relative;
+  margin: auto;
+  /* centers the fixed page horizontally in the browser */
+}
+
+
+.event .time {
+  font-size: 30px;
+  position: absolute;
+  right: 50px;
+  top: -10px;
+
+}
+
+.event .title {
+  font-size: 55px;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 85%;
+  /* font-family: Frutiger-b; */
+
+}
+
+.event .cost {
+  font-size: 30px;
+  position: absolute;
+  left: 50px;
+  top: -10px;
+  font-family: Frutiger-b;
+  /* Apply the font to the event */
+
+
+}
+
+
+.event .location {
+  font-size: 30px;
+  position: absolute;
+  top: 367px;
+  left: 50px;
+  width: 37%;
+
+}
+
+.event .standFirstCopy {
+  white-space: pre-line;
+
+  font-size: 30px;
+  position: absolute;
+  top: 367px;
+  left: 50%;
+  width: 45%;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 2s ease-out;
+}
+
+
+.card {
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 3s ease-out;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.qr-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 0px;
+  background: #212833;
+  color: #000;
+  width: 816px;
+  height: 88px;
+  /* min-height: 88px; */
+  /* Adjust this value if needed, based on content size (e.g., 140px image + 22px text + padding/gap) */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  /* This stacks them vertically */
+  justify-content: flex-start;
+  align-items: left;
+  gap: 10px;
+  z-index: 10;
+  /* Add overflow: hidden to contain any spillover for safety */
+  overflow: hidden;
+}
+
+.qr-overlay img.qr-image {
+  position: relative;
+  top: 15px;
+  left: 15px;
+  display: flex;
+  /* Ensure it behaves as a solid block */
+  width: 58px;
+  height: 58px;
+  /* Add line-height: 0; to remove any implicit space under the image */
+  line-height: 0;
+}
+
+.qr-overlay p.qr-text {
+  /* order: 2; */
+  position: absolute;
+  font-size: 22px;
+  line-height: 1.2;
+  top: 27px;
+  left: 88px;
+  margin: 0;
+  /* Ensure the text breaks correctly within the 220px width */
+  word-wrap: break-word;
+  box-sizing: border-box;
+  /* Good practice for padding/width calculation */
+  color: white;
+  font-family: Frutiger-l;
+  letter-spacing: -0.5px;
+  font-size: 30px;
+
+}

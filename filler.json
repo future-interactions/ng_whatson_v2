@@ -1,0 +1,18 @@
+[
+  {
+    "image": "./assets/images/filler_social_1680x1260.jpg",
+    "title": "Share your visit with us on social media",
+    "location": "On social media \n\nTag us using @NationalGallery",
+    "cost": "Free",
+    "time": "",
+    "standFirstCopy": "We’d love to see the Gallery through your eyes. Share your favourite paintings on social media, tag us and join the conversation. "
+  },
+  {
+    "image": "./assets/images/filler_membership_1680x1260.jpg",
+    "title": "National Gallery Membership",
+    "location": "Talk to our staff to find out more",
+    "cost": "From £45",
+    "time": "",
+    "standFirstCopy": "Enjoy unlimited exhibitions, exclusive spaces and rewarding benefits – all with a Membership to suit you."
+  }
+]
