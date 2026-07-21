@@ -1,0 +1,288 @@
+@font-face {
+  font-family: FrutigerLTPro-55Roman;
+  src: url(fonts/FrutigerLTPro-Roman.woff); 
+}
+@font-face {
+  font-family: FrutigerLTPro-45Light;
+  src: url(fonts/FrutigerLTPro-Light.woff);
+}
+
+html{
+    margin:0px;
+}
+
+body{
+    margin:0px;
+}
+
+p {
+    display: block;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+  }
+
+
+.Desk-Screen {
+  width: 1920px;
+  height: 1766px;
+  /* padding: 53px 94px 70px; */
+  margin: 0;
+  background-color: #252a36;   
+  display: flex;
+  flex-direction:row;
+}
+
+.Desk-Content-Left-Column{
+display: flex;
+flex-direction:column;
+padding-top: 53px;
+padding-left:94px;
+}
+
+.Desk-Content-Right-Column{
+  display: flex;
+flex-direction:column;
+padding-top: 53px;
+padding-right:94px;
+}
+
+.Desk-Content-Block-Container {
+  width: 800px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: 0 0px 62px 0;
+  padding: 0;
+}
+
+.Section-Title {
+display: flex;
+height: 113px;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+align-self: stretch;
+font-family: FrutigerLTPro-55Roman;
+font-size: 75px;
+letter-spacing: -3px;
+text-align: left;
+color: #ebebeb;
+border-bottom: 1px solid
+}
+
+.Exhibition-title{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+padding-bottom:16px;
+align-self: stretch;
+font-family: FrutigerLTPro-55Roman;
+font-size: 50px;
+letter-spacing: -1px;
+text-align: left;
+color: #ebebeb;
+border-bottom: 1px solid
+}
+
+.List-Item-Container {
+display: flex;
+padding: 16px 0px 16px 0px;
+align-items: flex-start;
+align-self: stretch;
+border-bottom: 1px solid;
+border-color: #6D7997;
+}
+
+.Product-and-Languages {
+display: flex;
+align-items: flex-start;
+gap: 18px;
+}
+
+.Product-Name {
+color: #EBEBEB;
+font-family: "FrutigerLTPro-45Light";
+font-size: 40px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+letter-spacing: -0.8px;
+flex-shrink: 0;
+}
+
+.Languages {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+margin-right:10px;
+}
+
+.Language {
+display: flex;
+height: 40px;
+padding: 4px 7px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+background: #394050;
+}
+
+.Languages-row-1 {
+display: flex;
+padding: 4px 0;
+align-items: center;
+gap: 12px;
+font-family: FrutigerLTPro-55Roman;
+color: #EBEBEB;
+font-size: 25px;
+font-style: normal;
+line-height: normal;
+letter-spacing: -0.5px;
+flex-wrap: wrap;
+}
+
+.Price-container{
+display: flex;
+justify-content: flex-end;
+align-items: center;
+gap: 10px;
+flex: 1 0 0;
+white-space: nowrap;
+}
+
+.Price{
+color: #EBEBEB;
+text-align: right;
+font-family: FrutigerLTPro-45Light;
+font-size: 40px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+}
+
+.Desk-Content-Block-Membership-Container {
+  width: 800px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: 0 132px 62px 0;
+  padding: 0;
+  gap:0px;
+}
+
+.Membership-Subtitle {
+display: flex;
+padding: 16px 0px 16px 0px;
+align-items: flex-start;
+align-self: stretch;
+border: none;
+}
+
+.Membership-product-list{
+   display: flex;
+   flex-direction: column;
+   gap:18px;
+}
+
+.Membership-product-container{
+display: flex;
+padding: 26px 26px 32px 26px;
+flex-direction:row;
+align-items: flex-start;
+align-self: stretch;
+border-radius: 18px;
+background: rgba(0, 0, 0, 0.27);
+}
+
+.Membership-product-text{
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+align-items: flex-start;
+gap: 12px;
+flex: 1 0 0;
+}
+
+.Membership-product-title{
+color: #EBEBEB;
+font-family: FrutigerLTPro-55Roman;
+font-size: 40px;
+font-style: normal;
+line-height: normal;
+letter-spacing: -1px;
+}
+
+.Membership-product-details{
+color: #EBEBEB;
+font-family: FrutigerLTPro-45Light;
+font-size: 25px;
+font-style: normal;
+line-height: 37px; /* 148% */
+letter-spacing: -0.2px;
+}
+
+.Membership-price-container{
+display: flex;
+width: auto;
+padding-bottom: 13px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+}
+
+.Membership-price-text{
+height: 39px;
+flex: 1 0 0;
+color: #EBEBEB;
+text-align: right;
+font-family: FrutigerLTPro-45Light;
+font-size: 40px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+}
+
+/* Exhibition carousel — fade transition */
+#exhibition-carousel-container {
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+#exhibition-carousel-container.fade-out {
+  opacity: 0;
+}
+
+/* Story-style progress bar */
+#story-progress-bar {
+  display: flex;
+  gap: 8px;
+  margin-top: 0px;
+  margin-bottom: 42px;
+  width: 800px;
+}
+.story-segment {
+  flex: 1;
+  height: 4px;
+  background: #1b1f27;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.story-segment-fill {
+  height: 100%;
+  width: 0%;
+  background: rgba(235, 235, 235, 0.25);
+  border-radius: 2px;
+  transition: width linear;
+}
+.story-segment-fill.complete {
+  width: 100%;
+  transition: none;
+}
