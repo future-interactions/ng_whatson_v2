@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sandy IR — Quantum Weather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      background: #00000a;
+      color: #e0e0e0;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+    }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      background: #080810;
+      border-right: 1px solid #1a1a2a;
+      overflow-y: auto;
+      padding-bottom: 24px;
+      z-index: 30;
+      transition: width 0.25s ease, border-color 0.25s ease, overflow 0.25s ease;
+    }
+    #sidebar.ui-hidden { width: 0; overflow: hidden; border-right-color: transparent; }
+
+    #sidebar-header {
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid #1a1a2a;
+    }
+    #sidebar-header p  { font-size: 10px; color: #444; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    #sidebar-header h1 { font-size: 13px; font-weight: 400; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    #status {
+      margin: 10px 12px 0;
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      color: #e88;
+      background: rgba(200,80,80,.10);
+    }
+
+    .ctrl-section { margin: 10px 12px 0; padding: 10px; border: 1px solid #1a1a2a; border-radius: 6px; }
+    .ctrl-section h3 { font-size: 10px; font-weight: 400; color: #444; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .ctrl-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .ctrl-row:last-child { margin-bottom: 0; }
+    .ctrl-row label { font-size: 11px; color: #777; width: 68px; flex-shrink: 0; }
+    .ctrl-row input[type=range] { flex: 1; accent-color: #e85; }
+    .ctrl-row span { font-size: 11px; color: #aaa; width: 34px; text-align: right; flex-shrink: 0; }
+    .ctrl-row select {
+      flex: 1;
+      background: #0a0a18;
+      color: #aaa;
+      border: 1px solid #2a2a3a;
+      padding: 3px 5px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      border-radius: 3px;
+    }
+
+    #hint { margin: 14px 12px 0; font-size: 10px; color: #282828; letter-spacing: 0.3px; }
+    #hint b { color: #404040; }
+
+    #canvas-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #000005;
+    }
+    #canvas-frame {
+      aspect-ratio: 10 / 3;
+      max-width: 100%;
+      max-height: 100%;
+      outline: 1px solid #0a0a20;
+      box-shadow: 0 0 60px rgba(200, 80, 30, 0.2);
+      overflow: hidden;
+      position: relative;
+    }
+    #canvas-frame canvas { display: block; width: 100% !important; height: 100% !important; }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <aside id="sidebar">
+    <div id="sidebar-header">
+      <p>Future Interactions</p>
+      <h1>Sandy IR</h1>
+    </div>
+
+    <div id="status">Loading…</div>
+
+    <!-- Playback -->
+    <div class="ctrl-section">
+      <h3>Playback</h3>
+      <div class="ctrl-row">
+        <label>Frame delay</label>
+        <input type="range" id="frame-duration" min="30" max="600" step="30" value="240">
+        <span id="frame-duration-val">240</span>
+      </div>
+    </div>
+
+    <!-- Storm -->
+    <div class="ctrl-section">
+      <h3>Storm</h3>
+      <div class="ctrl-row">
+        <label>Particles</label>
+        <input type="range" id="part-count" min="500" max="8000" step="100" value="6000">
+        <span id="part-count-val">6000</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Speed</label>
+        <input type="range" id="flow-speed" min="0.01" max="0.5" step="0.01" value="0.12">
+        <span id="flow-speed-val">0.12</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Dot size</label>
+        <input type="range" id="dot-size" min="1" max="12" step="0.5" value="4">
+        <span id="dot-size-val">4.0</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Trail</label>
+        <input type="range" id="trail-steps" min="5" max="60" step="1" value="55">
+        <span id="trail-steps-val">55</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Eye swirl</label>
+        <input type="range" id="eye-swirl" min="0" max="40" step="1" value="3">
+        <span id="eye-swirl-val">3</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Num arms</label>
+        <input type="range" id="num-arms" min="2" max="5" step="1" value="3">
+        <span id="num-arms-val">3</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Arm pitch</label>
+        <input type="range" id="arm-pitch" min="0.5" max="5" step="0.1" value="2.5">
+        <span id="arm-pitch-val">2.5</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Arm pull</label>
+        <input type="range" id="arm-strength" min="0" max="50" step="1" value="28">
+        <span id="arm-strength-val">28</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Blend</label>
+        <select id="blend-mode">
+          <option value="2">Additive</option>
+          <option value="1" selected>Normal</option>
+          <option value="3">Subtractive</option>
+          <option value="4">Multiply</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Intensity -->
+    <div class="ctrl-section">
+      <h3>Intensity</h3>
+      <div class="ctrl-row">
+        <label>IR boost</label>
+        <input type="range" id="intensity-boost" min="0.5" max="6" step="0.1" value="2.2">
+        <span id="intensity-boost-val">2.2</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Field mix</label>
+        <input type="range" id="field-opacity" min="0" max="1" step="0.05" value="0.55">
+        <span id="field-opacity-val">0.55</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Eye glow</label>
+        <input type="range" id="eye-glow" min="0" max="1" step="0.05" value="0.75">
+        <span id="eye-glow-val">0.75</span>
+      </div>
+    </div>
+
+    <!-- Bloom -->
+    <div class="ctrl-section">
+      <h3>Bloom</h3>
+      <div class="ctrl-row">
+        <label>Strength</label>
+        <input type="range" id="bloom-strength" min="0" max="5" step="0.1" value="0.0">
+        <span id="bloom-strength-val">0.0</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Radius</label>
+        <input type="range" id="bloom-radius" min="0" max="2" step="0.05" value="0.20">
+        <span id="bloom-radius-val">0.20</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Threshold</label>
+        <input type="range" id="bloom-thresh" min="0" max="1" step="0.01" value="0.70">
+        <span id="bloom-thresh-val">0.70</span>
+      </div>
+    </div>
+
+    <!-- Lifetime -->
+    <div class="ctrl-section">
+      <h3>Lifetime</h3>
+      <div class="ctrl-row">
+        <label>Life min</label>
+        <input type="range" id="life-min" min="30" max="600" step="10" value="200">
+        <span id="life-min-val">200</span>
+      </div>
+      <div class="ctrl-row">
+        <label>Life max</label>
+        <input type="range" id="life-max" min="30" max="1000" step="10" value="600">
+        <span id="life-max-val">600</span>
+      </div>
+    </div>
+
+    <div id="hint"><b>[S]</b> screenshot &nbsp; <b>[H]</b> hide UI</div>
+  </aside>
+
+  <div id="canvas-wrap">
+    <div id="canvas-frame"></div>
+  </div>
+
+  <script type="module" src="./src/storm.js"></script>
+</body>
+</html>
